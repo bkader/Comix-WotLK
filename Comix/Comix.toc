@@ -1,0 +1,13 @@
+## Interface: 30300
+## Title: Comix
+## Notes: A plain fun addon.
+## Author: Kader
+## DefaultState: Enabled
+## LoadOnDemand: 0
+## SavedVariablesPerCharacter: ComixDB
+
+Embeds.xml
+Locales.xml
+Core.lua
+Options.lua
+Media.lua
