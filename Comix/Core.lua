@@ -66,6 +66,8 @@ do
 			Comix:Shake(true)
 		elseif cmd == "about" then
 			Comix:Print("Author: \124cfff58cbaKader\124r (\124cff808080bkader#6361\124r)\nEmail: \124cff20ff20bkader@mail.com\124r\nWebsite: \124cff20ff20https://github.com/waddons/Comix-WotLK\124r")
+		elseif cmd == "debug" then
+			Comix.db.profile.debug = not Comix.db.profile.debug
 		elseif cmd == "help" then
 			Comix:Print("Usage:")
 			print("\124cffffaeae/comix\124r \124cffffff33about\124r / \124cffffff33help\124r")
@@ -132,12 +134,22 @@ function Comix:Print(msg, ...)
 	if ... then
 		ChatFrame:AddMessage(msg, ...)
 	else
-		print("\124cFF33FF99Comix\124r:", msg)
+		print("\124cff33ff99Comix\124r:", msg)
 	end
 end
 
 function Comix:Printf(msg, ...)
 	self:Print(msg:format(...))
+end
+
+function Comix:Debug(msg, ...)
+	if not self.db.profile.debug then
+		return
+	elseif ... then
+		ChatFrame:AddMessage(msg, ...)
+	else
+		print("\124cff33ff99Comix Debug\124r:", msg)
+	end
 end
 
 function Comix:CreateFrames()
@@ -174,90 +186,90 @@ do
 	function Comix:LoaddaShit()
 		-- Counting Normal Images --
 		self.ImagePhysicalCt = self.ImagePhysicalCt or #self.Images.Physical
-		ChatFrame:AddMessage("Me loaded " .. self.ImagePhysicalCt .. " piccus", 0.3, 0.3, 0.3)
+		self:Debug("Me loaded " .. self.ImagePhysicalCt .. " piccus", 0.3, 0.3, 0.3)
 
 		-- Counting Images in Image-Sets --
 		self.ImageFireCt = self.ImageFireCt or #self.Images.Fire
-		ChatFrame:AddMessage("Me loaded " .. self.ImageFireCt .. " piccus", 0.3, 0.3, 1)
+		self:Debug("Me loaded " .. self.ImageFireCt .. " piccus", 0.3, 0.3, 1)
 
 		self.ImageFrostCt = self.ImageFrostCt or #self.Images.Frost
-		ChatFrame:AddMessage("Me loaded " .. self.ImageFrostCt .. " piccus", 0.3, 1, 1)
+		self:Debug("Me loaded " .. self.ImageFrostCt .. " piccus", 0.3, 1, 1)
 
 		self.ImageFrostFireCt = self.ImageFrostFireCt or #self.Images.FrostFire
-		ChatFrame:AddMessage("Me loaded " .. self.ImageFrostFireCt .. " piccus", 0.3, 1, 1)
+		self:Debug("Me loaded " .. self.ImageFrostFireCt .. " piccus", 0.3, 1, 1)
 
 		self.ImageShadowCt = self.ImageShadowCt or #self.Images.Shadow
-		ChatFrame:AddMessage("Me loaded " .. self.ImageShadowCt .. " piccus", 0.3, 1, 0.3)
+		self:Debug("Me loaded " .. self.ImageShadowCt .. " piccus", 0.3, 1, 0.3)
 
 		self.ImageNatureCt = self.ImageNatureCt or #self.Images.Nature
-		ChatFrame:AddMessage("Me loaded " .. self.ImageNatureCt .. " piccus", 1, 1, 0.3)
+		self:Debug("Me loaded " .. self.ImageNatureCt .. " piccus", 1, 1, 0.3)
 
 		self.ImageArcaneCt = self.ImageArcaneCt or #self.Images.Arcane
-		ChatFrame:AddMessage("Me loaded " .. self.ImageArcaneCt .. " piccus", 1, 0.3, 0.3)
+		self:Debug("Me loaded " .. self.ImageArcaneCt .. " piccus", 1, 0.3, 0.3)
 
 		self.ImageHolyHealCt = self.ImageHolyHealCt or #self.Images.HolyHeal
-		ChatFrame:AddMessage("Me loaded " .. self.ImageHolyHealCt .. " piccus", 0.5, 0.5, 0.5)
+		self:Debug("Me loaded " .. self.ImageHolyHealCt .. " piccus", 0.5, 0.5, 0.5)
 
 		self.ImageHolyDamageCt = self.ImageHolyDamageCt or #self.Images.HolyDamage
-		ChatFrame:AddMessage("Me loaded " .. self.ImageHolyDamageCt .. " piccus", 0.5, 0.5, 0.5)
+		self:Debug("Me loaded " .. self.ImageHolyDamageCt .. " piccus", 0.5, 0.5, 0.5)
 
 		self.ImageDeathCt = self.ImageDeathCt or #self.Images.Death
-		ChatFrame:AddMessage("Me loaded " .. self.ImageDeathCt .. " piccus", 0.5, 0.5, 0.5)
+		self:Debug("Me loaded " .. self.ImageDeathCt .. " piccus", 0.5, 0.5, 0.5)
 
 		self.ImageOverkillCt = self.ImageOverkillCt or #self.Images.Overkill
-		ChatFrame:AddMessage("Me loaded " .. self.ImageOverkillCt .. " piccus", 0.5, 0.5, 0.5)
+		self:Debug("Me loaded " .. self.ImageOverkillCt .. " piccus", 0.5, 0.5, 0.5)
 
 		self.ImageSpecialCt = self.ImageSpecialCt or #self.Images.Special
-		ChatFrame:AddMessage("Me loaded " .. self.ImageSpecialCt .. " piccus", 0.5, 0.5, 0.5)
+		self:Debug("Me loaded " .. self.ImageSpecialCt .. " piccus", 0.5, 0.5, 0.5)
 
 		self.ImageMortalCombatCt = self.ImageMortalCombatCt or #self.Images.MortalCombat
-		ChatFrame:AddMessage("Me loaded " .. self.ImageMortalCombatCt .. " piccus", 0.5, 0.5, 0.5)
+		self:Debug("Me loaded " .. self.ImageMortalCombatCt .. " piccus", 0.5, 0.5, 0.5)
 
 		-- Counting Normal Sounds --
 		self.SoundCritCt = self.SoundCritCt or #self.Sounds.Crit
-		ChatFrame:AddMessage("Me loaded " .. self.SoundCritCt .. " sounds", 1, 0.3, 1)
+		self:Debug("Me loaded " .. self.SoundCritCt .. " sounds", 1, 0.3, 1)
 
 		-- Counting Zone Sounds --
 		self.SoundZoneCt = self.SoundZoneCt or #self.Sounds.Zone
-		ChatFrame:AddMessage("Me loaded " .. self.SoundZoneCt .. " sounds", 1, 1, 1)
+		self:Debug("Me loaded " .. self.SoundZoneCt .. " sounds", 1, 1, 1)
 
 		-- Counting One hit Sounds --
 		self.SoundOneHitCt = self.SoundOneHitCt or #self.Sounds.OneHit
-		ChatFrame:AddMessage("Me loaded " .. self.SoundOneHitCt .. " sounds", 1, 1, 1)
+		self:Debug("Me loaded " .. self.SoundOneHitCt .. " sounds", 1, 1, 1)
 
 		-- Counting Healing Sounds --
 		self.SoundHealingCt = self.SoundHealingCt or #self.Sounds.Healing
-		ChatFrame:AddMessage("Me loaded " .. self.SoundHealingCt .. " sounds", 1, 1, 1)
+		self:Debug("Me loaded " .. self.SoundHealingCt .. " sounds", 1, 1, 1)
 
 		-- Counting Special Sounds --
 		self.SoundSpecialCt = self.SoundSpecialCt or #self.Sounds.Special
-		ChatFrame:AddMessage("Me loaded " .. self.SoundSpecialCt .. " specials", 1, 0.3, 0.3)
+		self:Debug("Me loaded " .. self.SoundSpecialCt .. " specials", 1, 0.3, 0.3)
 
 		-- Counting Ability Sounds --
 		self.SoundAbilityCt = self.SoundAbilityCt or #self.Sounds.Ability
-		ChatFrame:AddMessage("Me loaded " .. self.SoundAbilityCt .. " sounds", 1, 1, 1)
+		self:Debug("Me loaded " .. self.SoundAbilityCt .. " sounds", 1, 1, 1)
 
 		-- Counting Death Sounds --
 		self.SoundDeathCt = self.SoundDeathCt or #self.Sounds.Death
-		ChatFrame:AddMessage("Me loaded " .. self.SoundDeathCt .. " sounds", 1, 1, 1)
+		self:Debug("Me loaded " .. self.SoundDeathCt .. " sounds", 1, 1, 1)
 
 		-- Counting Ready check Sounds --
 		self.SoundReadyCheckCt = self.SoundReadyCheckCt or #self.Sounds.ReadyCheck
-		ChatFrame:AddMessage("Me loaded " .. self.SoundReadyCheckCt .. " sounds", 1, 1, 1)
+		self:Debug("Me loaded " .. self.SoundReadyCheckCt .. " sounds", 1, 1, 1)
 
 		-- Counting Res Sounds --
 		self.SoundResCt = self.SoundResCt or #self.Sounds.Res
-		ChatFrame:AddMessage("Me loaded " .. self.SoundResCt .. " sounds", 1, 1, 1)
+		self:Debug("Me loaded " .. self.SoundResCt .. " sounds", 1, 1, 1)
 
 		-- Counting Objection Sounds --
 		self.SoundObjectionCt = self.SoundObjectionCt or #self.Sounds.Objection
-		ChatFrame:AddMessage("Me loaded " .. self.SoundObjectionCt .. " sounds", 1, 1, 1)
+		self:Debug("Me loaded " .. self.SoundObjectionCt .. " sounds", 1, 1, 1)
 
 		-- Counting KillCount Sounds --
 		self.SoundKillCountCt = self.SoundKillCountCt or #self.Sounds.KillCount
-		ChatFrame:AddMessage("Me loaded " .. self.SoundKillCountCt .. " sounds", 1, 1, 1)
+		self:Debug("Me loaded " .. self.SoundKillCountCt .. " sounds", 1, 1, 1)
 
-		ChatFrame:AddMessage("Open options GUI with /comix or get Slashcommands with /comix help", 0.7, 0.7, 1)
+		self:Print("Open options GUI with \124cffffd700/comix\124r or get Slashcommands with \124cffffd700/comix help\124r.")
 	end
 end
 
@@ -377,7 +389,7 @@ do
 
 		if not self.db.profile.enabled then
 			self.frame:SetScript("OnUpdate", nil)
-			self:UnregisterAllEvent()
+			self:UnregisterAllEvents()
 			return
 		end
 
@@ -721,7 +733,7 @@ do
 			end
 		end
 
-		if event == "SPELL_DAMAGE" or event == "RANGE_DAMAGE" and srcGUID == self.userGUID then
+		if (event == "SPELL_DAMAGE" or event == "RANGE_DAMAGE") and srcGUID == self.userGUID then
 			local spellschool, amount, overkill, _, _, _, _, critical = select(3, ...)
 
 			if self.db.profile.overkill and (amount - overkill) > 1 then
@@ -779,7 +791,7 @@ do
 			return
 		end
 
-		if event == "SWING_DAMAGE" then
+		if event == "SWING_DAMAGE" and srcGUID == self.userGUID then
 			local amount, overkill, _, _, _, _, critical = ...
 
 			if self.db.profile.overkill and (amount - overkill) > 1 then
