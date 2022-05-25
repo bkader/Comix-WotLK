@@ -7,8 +7,6 @@ Comix.defaults = {
 		enabled = true,
 		sounds = true,
 		images = true,
-		xOffset = 0,
-		yOffset = 0,
 		maxScale = 2,
 		animSpeed = 1,
 		-- shake --
@@ -77,19 +75,6 @@ Comix.options = {
 			name = L["Images"],
 			desc = L["You don't like images? Disable them here."],
 			order = 30
-		},
-		xOffset = {
-			type = "range",
-			name = L["Offset X"],
-			order = 3,
-			min = -100, max = 100, step = 0.1, bigStep = 1,
-			order = 40
-		},
-		yOffset = {
-			type = "range",
-			name = L["Offset Y"],
-			min = -100, max = 100, step = 0.1, bigStep = 1,
-			order = 50
 		},
 		scale = {
 			type = "range",

@@ -5,7 +5,6 @@ Comix.callbacks = Comix.callbacks or LibStub("CallbackHandler-1.0"):New(Comix)
 local L = LibStub("AceLocale-3.0"):GetLocale("Comix")
 local ACD = LibStub("AceConfigDialog-3.0")
 local LSM = LibStub("LibSharedMedia-3.0")
-local forward, backward, left, right
 local random = math.random
 local ChatFrame = DEFAULT_CHAT_FRAME
 local _
@@ -304,7 +303,7 @@ function Comix:CallPic(image, name)
 	end
 
 	self.currentImage = image
-	self:DongPic(self.xCoords, self.yCoords, self.currentImage, name)
+	self:DongPic(self.xCoords, self.yCoords, image, name)
 end
 
 function Comix:CustomPic(filePath)
@@ -348,13 +347,6 @@ end
 -------------------------------------------------------------------------------
 
 do
-	-- ReadyCheck
-	-- local function doReadyCheck()
-	-- 	if Comix.db.profile.enabled and Comix.db.profile.readySound then
-	-- 		Comix:DongSound(Comix.Sounds.ReadyCheck, random(1, Comix.SoundReadyCheckCt))
-	-- 	end
-	-- end
-
 	local function jumpOrAscendStart()
 		if not Comix.db.profile.enabled then return end
 		if UnitOnTaxi("player") then return end
@@ -389,35 +381,14 @@ do
 			return
 		end
 
-		self.me = UnitName("player")
+		self.userGUID = UnitGUID("player")
+		self.userName = UnitName("player")
 
 		self.frame:SetScript("OnUpdate", self.Update)
 
-		-- ready check sound
-		-- hooksecurefunc("DoReadyCheck", doReadyCheck)
-
 		-- jump sound
-		hooksecurefunc("MoveForwardStart", function() forward = true end)
-		hooksecurefunc("MoveForwardStop", function() forward = false end)
-		hooksecurefunc("MoveBackwardStart", function() backward = true end)
-		hooksecurefunc("MoveBackwardStop", function() backward = false end)
-		hooksecurefunc("StrafeLeftStart", function() left = true end)
-		hooksecurefunc("StrafeLeftStop", function() left = false end)
-		hooksecurefunc("StrafeRightStart", function() right = true end)
-		hooksecurefunc("StrafeRightStop", function() right = false end)
 		hooksecurefunc("JumpOrAscendStart", jumpOrAscendStart)
 
-		-- self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
-		-- self:RegisterEvent("PLAYER_TARGET_CHANGED")
-		-- self:RegisterEvent("CHAT_MSG_TEXT_EMOTE")
-		-- self:RegisterEvent("CHAT_MSG_EMOTE")
-		-- self:RegisterEvent("CHAT_MSG_YELL")
-		-- self:RegisterEvent("UNIT_HEALTH")
-		-- self:RegisterEvent("UNIT_SPELLCAST_SENT")
-		-- self:RegisterEvent("RESURRECT_REQUEST")
-		-- self:RegisterEvent("PLAYER_ALIVE")
-		-- self:RegisterEvent("PLAYER_UNGHOST")
-		-- self:RegisterEvent("PLAYER_DEAD")
 		self:ToggleEvent("READY_CHECK", "readySound")
 		self:ToggleEvent("ZONE_CHANGED_NEW_AREA", "zoneSound")
 
@@ -551,6 +522,7 @@ end
 function Comix:KillCount()
 	if self.db.profile.KillCount then
 		self.killCount = (self.killCount or 0) + 1
+		print("here", self.killCount)
 		self.killCountPlayed = false
 
 		if not self.killCountPlayed then
@@ -700,7 +672,7 @@ do
 
 	function Comix:COMBAT_LOG_EVENT_UNFILTERED(_, _, event, srcGUID, srcName, srcFlags, dstGUID, dstName, dstFlags, ...)
 		if event == "SPELL_AURA_APPLIED" and select(2, ...) == L["Battle Shout"] then
-			if srcName == self.me and self.db.profile.battleSound then
+			if srcName == self.userName and self.db.profile.battleSound then
 				self:DongPic(0, 0, self.Images.Special[1])
 				self:DongSound(self.Sounds.Special, 1)
 			end
@@ -708,7 +680,7 @@ do
 		end
 
 		if srcFlags and bit.band(srcFlags, COMBATLOG_OBJECT_REACTION_FRIENDLY) ~= 0 and event == "SPELL_HEAL" then
-			if srcName ~= self.me and dstName == self.me then
+			if srcName ~= self.userName and dstName == self.userName then
 				local amount, _, _, critical = select(4, ...)
 				if critical then
 					if self.db.profile.critGapEnabled and amount < self.db.profile.critGap then
@@ -740,7 +712,7 @@ do
 
 					if random(1, 100) <= 100 then
 						if self.db.profile.critHealFlash then
-							self:Flash(0, 1, 0, dstName == self.me and 1 or 2)
+							self:Flash(0, 1, 0, dstName == self.userName and 1 or 2)
 						end
 						self:CallPic(self.Images.HolyHeal[random(1, self.ImageHolyHealCt)])
 						if self.db.profile.critHeal then
@@ -751,7 +723,7 @@ do
 			end
 		end
 
-		if event == "SPELL_DAMAGE" or event == "RANGE_DAMAGE" then
+		if event == "SPELL_DAMAGE" or event == "RANGE_DAMAGE" and srcGUID == self.userGUID then
 			local spellschool, amount, overkill, _, _, _, _, critical = select(3, ...)
 
 			if self.db.profile.overkill and (amount - overkill) > 1 then
@@ -765,9 +737,9 @@ do
 					return
 				end
 				if random(1, 100) <= 100 then
-					-- if self.db.profile.shake then
-					-- 	self:Shake()
-					-- end
+					if self.db.profile.shake then
+						self:Shake()
+					end
 					self.critCount = (self.critCount or 0) + 1
 					if self.critCount >= 3 then
 						if self.db.profile.specialSound then
@@ -823,9 +795,9 @@ do
 					return
 				end
 				if random(1, 100) <= 100 then
-					-- if self.db.profile.shake then
-					-- 	self:Shake()
-					-- end
+					if self.db.profile.shake then
+						self:Shake()
+					end
 					self.critCount = (self.critCount or 0) + 1
 					if self.critCount >= 3 then
 						if self.db.profile.specialSound then

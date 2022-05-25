@@ -1,4 +1,5 @@
 local L = LibStub("AceLocale-3.0"):NewLocale("Comix", "enUS", true)
+if not L then return end
 
 L["Enable"] = true
 L["Sound"] = true
@@ -6,8 +7,6 @@ L["There is nothing better than sound, always leave this enabled!"] = true
 
 L["Images"] = true
 L["You don't like images? Disable them here."] = true
-L["Offset X"] = true
-L["Offset Y"] = true
 
 L["Scale"] = true
 L["Adjust the size of the images."] = true

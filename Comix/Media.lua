@@ -117,20 +117,20 @@ do
 
 	-- special --
 	Images.Special = {
-		[1] = path .. "Spacial\\battleshout.blp",
-		[2] = path .. "Spacial\\demoshout.blp",
-		[3] = path .. "Spacial\\ironman.blp",
-		[4] = path .. "Spacial\\stun.blp",
-		[5] = path .. "Spacial\\objection.blp"
+		[1] = path .. "Special\\battleshout.blp",
+		[2] = path .. "Special\\demoshout.blp",
+		[3] = path .. "Special\\ironman.blp",
+		[4] = path .. "Special\\stun.blp",
+		[5] = path .. "Special\\objection.blp"
 	}
 
 	-- mortal combat --
 	Images.MortalCombat = {
-		[1] = path .. "Spacial\\brutality.blp",
-		[2] = path .. "Spacial\\fatality.blp",
-		[3] = path .. "Spacial\\superb.blp",
-		[4] = path .. "Spacial\\outstanding.blp",
-		[5] = path .. "Spacial\\excellent.blp"
+		[1] = path .. "Special\\brutality.blp",
+		[2] = path .. "Special\\fatality.blp",
+		[3] = path .. "Special\\superb.blp",
+		[4] = path .. "Special\\outstanding.blp",
+		[5] = path .. "Special\\excellent.blp"
 	}
 end
 
