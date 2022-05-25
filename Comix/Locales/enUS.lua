@@ -89,7 +89,7 @@ L["Enable Objection Sounds, Phoenix Wright Style."] = true
 L["Objection Sounds"] = true
 
 L["Objection Images"] = true
-L["Enable Objection Images, Portraits only display for party/raid members."] = true
+L["Enable Objection Images. Portraits only display for party/raid members."] = true
 
 L["Public Objections"] = true
 L["Ignore Objections from everyone outside your party or raid. Public objections do not show a portrait and are not gender specific."] = true

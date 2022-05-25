@@ -249,7 +249,7 @@ Comix.options = {
 				objectionImage = {
 					type = "toggle",
 					name = L["Objection Images"],
-					desc = L["Enable Objection Images, Portraits only display for party/raid members."],
+					desc = L["Enable Objection Images. Portraits only display for party/raid members."],
 					order = 30
 				},
 				objectionPublic = {
