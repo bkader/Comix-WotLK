@@ -520,9 +520,8 @@ end
 -------------------------------------------------------------------------------
 
 function Comix:KillCount()
-	if self.db.profile.KillCount then
+	if self.db.profile.killCount then
 		self.killCount = (self.killCount or 0) + 1
-		print("here", self.killCount)
 		self.killCountPlayed = false
 
 		if not self.killCountPlayed then
