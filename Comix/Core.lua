@@ -6,6 +6,7 @@ local L = LibStub("AceLocale-3.0"):GetLocale("Comix")
 local ACD = LibStub("AceConfigDialog-3.0")
 local LSM = LibStub("LibSharedMedia-3.0")
 local random = math.random
+local format = string.format
 local ChatFrame = DEFAULT_CHAT_FRAME
 local _
 
@@ -13,10 +14,6 @@ function Comix:OnInitialize()
 	LSM:Register("font", "Comix", [=[Interface\AddOns\Comix\Media\Fonts\Comix.ttf]=])
 
 	self.db = LibStub("AceDB-3.0"):New("ComixDB", self.defaults, "Default")
-
-	-- local AceDBOptions = LibStub("AceDBOptions-3.0", true)
-	-- if AceDBOptions then
-	-- end
 
 	LibStub("AceConfig-3.0"):RegisterOptionsTable("Comix", self.options)
 	self.optionsFrame = ACD:AddToBlizOptions("Comix", "Comix")
@@ -53,25 +50,26 @@ do
 			Comix:Print("Me Creates: Hello World")
 			Comix:DongSound(Comix.Sounds.Special, random(1, Comix.SoundSpecialCt))
 		elseif cmd == "hide" then
-			-- TODO: hide frames
+			Comix:Hide()
 		elseif cmd == "pic" or cmd == "image" then
 			Comix:CallPic(Comix.Images.Physical[random(1, Comix.ImagePhysicalCt)])
-		elseif cmd == "specialpic" then
-			-- TODO: Special image
-		elseif cmd == "clearhug" then
-			-- TODO: Clear hugs
-		elseif cmd == "showhug" then
-			-- TODO: Show hugs
-		elseif cmd == "reporthug" then
-			-- TODO: Report jumps
+		elseif cmd == "special" or cmd == "specialpic" then
+			Comix:CallPic(Comix.Images.Special[random(1, Comix.ImageSpecialCt)])
 		elseif cmd == "clearjump" then
-			-- TODO: Clear jumps
+			Comix.jumpCount = 0
+			Comix:Print(L["Jump counter reset."])
 		elseif cmd == "showjump" then
-			-- TODO: Show jumps
+			Comix:Printf("[Jump Report]: %s", format(L["%s has jumped %d times."], Comix.userName, Comix.jumpCount or 0))
 		elseif cmd == "reportjump" then
-			-- TODO: Report jumps
+			SendChatMessage(format("[Comix] %s", format(L["%s has jumped %d times."], Comix.userName, Comix.jumpCount or 0)), "SAY")
+		elseif cmd == "about" then
+			Comix:Print("Author: \124cfff58cbaKader\124r (\124cff808080bkader#6361\124r)\nEmail: \124cff20ff20bkader@mail.com\124r\nWebsite: \124cff20ff20https://github.com/waddons/Comix-WotLK\124r")
 		elseif cmd == "help" then
-			-- TODO: Show help
+			Comix:Print("Usage:")
+			print("\124cffffaeae/comix\124r \124cffffff33about\124r / \124cffffff33help\124r")
+			print("\124cffffaeae/comix\124r \124cffffff33create\124r / \124cffffff33hide\124r")
+			print("\124cffffaeae/comix\124r \124cffffff33pic\124r / \124cffffff33special\124r")
+			print("\124cffffaeae/comix\124r \124cffffff33clearjump\124r / \124cffffff33showjump\124r / \124cffffff33reportjump\124r")
 		else
 			ACD:Open("Comix")
 		end
@@ -132,7 +130,7 @@ function Comix:Print(msg, ...)
 	if ... then
 		ChatFrame:AddMessage(msg, ...)
 	else
-		print("|cFF33FF99Comix|r:", msg)
+		print("\124cFF33FF99Comix\124r:", msg)
 	end
 end
 

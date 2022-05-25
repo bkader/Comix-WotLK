@@ -57,6 +57,8 @@ L["This Turns on the Death Sounds and Images, makes dying much more demoralizing
 
 L["Jump"] = true
 L["Disable the annoying boing sound for jumping by unchecking this here box."] = true
+L["Jump counter reset."] = true
+L["%s has jumped %d times."] = true
 
 L["Battle Shout"] = GetSpellInfo(47436)
 L["Almost as cool as Demoralizing Shout, only for battles."] = true

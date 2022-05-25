@@ -57,6 +57,8 @@ L["This Turns on the Death Sounds and Images, makes dying much more demoralizing
 
 L["Jump"] = "Saut"
 L["Disable the annoying boing sound for jumping by unchecking this here box."] = "Désactive l'agaçant son boing pour les sauts en décochant cette case."
+L["Jump counter reset."] = "Compteur de sauts réinitialisé."
+L["%s has jumped %d times."] = "%s a sauté %d fois."
 
 L["Almost as cool as Demoralizing Shout, only for battles."] = "Presque aussi cool que le Cri démoralisant, mais pour les batailles."
 
