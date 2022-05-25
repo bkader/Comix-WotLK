@@ -10,7 +10,7 @@ Comix.defaults = {
 		maxScale = 2,
 		animSpeed = 1,
 		-- shake --
-		shake = true,
+		shake = false,
 		shakeDuration = 1,
 		shakeIntensity = 70,
 		shakeOffset = 1,
@@ -45,9 +45,29 @@ Comix.defaults = {
 		readySound = true,
 		resSound = true,
 		specialSound = true,
-		zoneSound = true
+		zoneSound = false
 	}
 }
+
+local function Disabled_Shake()
+	return (Comix.db.profile.shake ~= true)
+end
+
+local function Disabled_Critial()
+	return (Comix.db.profile.critical ~= true)
+end
+
+local function Disabled_Overkill()
+	return (Comix.db.profile.overkill ~= true)
+end
+
+local function Disabled_Finish()
+	return (Comix.db.profile.finish ~= true)
+end
+
+local function Disabled_Object()
+	return (Comix.db.profile.objection ~= true)
+end
 
 Comix.options = {
 	type = "group",
@@ -105,18 +125,24 @@ Comix.options = {
 					type = "range",
 					name = L["Duration"],
 					min = 1, max = 3, step = 0.1, bigStep = 1,
+					hidden = Disabled_Shake,
+					disabled = Disabled_Shake,
 					order = 20
 				},
 				shakeIntensity = {
 					type = "range",
 					name = L["Intensity"],
 					min = 0, max = 100, step = 1,
+					hidden = Disabled_Shake,
+					disabled = Disabled_Shake,
 					order = 30
 				},
 				shakeOffset = {
 					type = "range",
 					name = L["Offset"],
 					min = 0, max = 3, step = 1,
+					hidden = Disabled_Shake,
+					disabled = Disabled_Shake,
 					order = 40
 				}
 			}
@@ -139,11 +165,15 @@ Comix.options = {
 					type = "toggle",
 					name = L["Enable for heals"],
 					desc = L["Toggle the heal sounds."],
+					hidden = Disabled_Critial,
+					disabled = Disabled_Critial,
 					order = 20
 				},
 				critSound = {
 					type = "toggle",
 					name = L["Sound"],
+					hidden = Disabled_Critial,
+					disabled = Disabled_Critial,
 					order = 30
 				},
 				critPercent = {
@@ -151,29 +181,39 @@ Comix.options = {
 					name = L["Crit Percent"],
 					desc = L["Percentage chance for crits to show."],
 					width = "double",
+					hidden = Disabled_Critial,
+					disabled = Disabled_Critial,
 					order = 40
 				},
 				critGapEnabled = {
 					type = "toggle",
 					name = L["Critical Gap"],
+					hidden = Disabled_Critial,
+					disabled = Disabled_Critial,
 					order = 50
 				},
 				critGap = {
 					type = "input",
 					name = L["Gap"],
 					desc = L["Only want fun at really impressive crits ? try this."],
+					hidden = Disabled_Critial,
+					disabled = Disabled_Critial,
 					order = 60
 				},
 				critFlash = {
 					type = "toggle",
 					name = L["Flash"],
 					desc = L["Super fancy flashes when you crit or are crit by something."],
+					hidden = Disabled_Critial,
+					disabled = Disabled_Critial,
 					order = 70
 				},
 				critHealFlash = {
 					type = "toggle",
 					name = L["Flash for heals"],
 					desc = L["Kind of like the crit flash except replace the word crit with heal."],
+					hidden = Disabled_Critial,
+					disabled = Disabled_Critial,
 					order = 80
 				}
 			}
@@ -196,6 +236,8 @@ Comix.options = {
 					name = L["Gap"],
 					desc = L["Minimum amount to trigger this."],
 					min = 50, max = 100, step = 1, bigStep = 5,
+					hidden = Disabled_Overkill,
+					disabled = Disabled_Overkill,
 					order = 20
 				}
 			}
@@ -217,6 +259,8 @@ Comix.options = {
 				finishSound = {
 					type = "toggle",
 					name = L["Sound"],
+					hidden = Disabled_Finish,
+					disabled = Disabled_Finish,
 					order = 20
 				},
 				finishGap = {
@@ -224,6 +268,8 @@ Comix.options = {
 					name = L["Gap"],
 					desc = L["Percentage of health left to trigger."],
 					min = 1, max = 30, step = 1,
+					hidden = Disabled_Finish,
+					disabled = Disabled_Finish,
 					order = 30
 				}
 			}
@@ -244,18 +290,24 @@ Comix.options = {
 				objectionSound = {
 					type = "toggle",
 					name = L["Objection Sounds"],
+					hidden = Disabled_Object,
+					disabled = Disabled_Object,
 					order = 20
 				},
 				objectionImage = {
 					type = "toggle",
 					name = L["Objection Images"],
 					desc = L["Enable Objection Images. Portraits only display for party/raid members."],
+					hidden = Disabled_Object,
+					disabled = Disabled_Object,
 					order = 30
 				},
 				objectionPublic = {
 					type = "toggle",
 					name = L["Public Objections"],
 					desc = L["Ignore Objections from everyone outside your party or raid. Public objections do not show a portrait and are not gender specific."],
+					hidden = Disabled_Object,
+					disabled = Disabled_Object,
 					order = 40
 				}
 			}

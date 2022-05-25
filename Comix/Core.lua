@@ -62,6 +62,8 @@ do
 			Comix:Printf("[Jump Report]: %s", format(L["%s has jumped %d times."], Comix.userName, Comix.jumpCount or 0))
 		elseif cmd == "reportjump" then
 			SendChatMessage(format("[Comix] %s", format(L["%s has jumped %d times."], Comix.userName, Comix.jumpCount or 0)), "SAY")
+		elseif cmd == "shake" then
+			Comix:Shake(true)
 		elseif cmd == "about" then
 			Comix:Print("Author: \124cfff58cbaKader\124r (\124cff808080bkader#6361\124r)\nEmail: \124cff20ff20bkader@mail.com\124r\nWebsite: \124cff20ff20https://github.com/waddons/Comix-WotLK\124r")
 		elseif cmd == "help" then
@@ -102,7 +104,7 @@ do
 		self:CreateFrames()
 		self:LoaddaShit()
 
-		-- self:DongSound(self.Sounds.Special, 6) -- TODO: ENABLE
+		self:DongSound(self.Sounds.Special, 6)
 
 		self.worldFramePoints = {}
 		for i = 1, WorldFrame:GetNumPoints() do
@@ -171,88 +173,88 @@ do
 
 	function Comix:LoaddaShit()
 		-- Counting Normal Images --
-		self.ImagePhysicalCt = self.ImagePhysicalCt or table_len(self.Images.Physical)
+		self.ImagePhysicalCt = self.ImagePhysicalCt or #self.Images.Physical
 		ChatFrame:AddMessage("Me loaded " .. self.ImagePhysicalCt .. " piccus", 0.3, 0.3, 0.3)
 
 		-- Counting Images in Image-Sets --
-		self.ImageFireCt = table_len(self.Images.Fire)
+		self.ImageFireCt = self.ImageFireCt or #self.Images.Fire
 		ChatFrame:AddMessage("Me loaded " .. self.ImageFireCt .. " piccus", 0.3, 0.3, 1)
 
-		self.ImageFrostCt = table_len(self.Images.Frost)
+		self.ImageFrostCt = self.ImageFrostCt or #self.Images.Frost
 		ChatFrame:AddMessage("Me loaded " .. self.ImageFrostCt .. " piccus", 0.3, 1, 1)
 
-		self.ImageFrostFireCt = table_len(self.Images.FrostFire)
+		self.ImageFrostFireCt = self.ImageFrostFireCt or #self.Images.FrostFire
 		ChatFrame:AddMessage("Me loaded " .. self.ImageFrostFireCt .. " piccus", 0.3, 1, 1)
 
-		self.ImageShadowCt = table_len(self.Images.Shadow)
+		self.ImageShadowCt = self.ImageShadowCt or #self.Images.Shadow
 		ChatFrame:AddMessage("Me loaded " .. self.ImageShadowCt .. " piccus", 0.3, 1, 0.3)
 
-		self.ImageNatureCt = table_len(self.Images.Nature)
+		self.ImageNatureCt = self.ImageNatureCt or #self.Images.Nature
 		ChatFrame:AddMessage("Me loaded " .. self.ImageNatureCt .. " piccus", 1, 1, 0.3)
 
-		self.ImageArcaneCt = table_len(self.Images.Arcane)
+		self.ImageArcaneCt = self.ImageArcaneCt or #self.Images.Arcane
 		ChatFrame:AddMessage("Me loaded " .. self.ImageArcaneCt .. " piccus", 1, 0.3, 0.3)
 
-		self.ImageHolyHealCt = table_len(self.Images.HolyHeal)
+		self.ImageHolyHealCt = self.ImageHolyHealCt or #self.Images.HolyHeal
 		ChatFrame:AddMessage("Me loaded " .. self.ImageHolyHealCt .. " piccus", 0.5, 0.5, 0.5)
 
-		self.ImageHolyDamageCt = table_len(self.Images.HolyDamage)
+		self.ImageHolyDamageCt = self.ImageHolyDamageCt or #self.Images.HolyDamage
 		ChatFrame:AddMessage("Me loaded " .. self.ImageHolyDamageCt .. " piccus", 0.5, 0.5, 0.5)
 
-		self.ImageDeathCt = table_len(self.Images.Death)
+		self.ImageDeathCt = self.ImageDeathCt or #self.Images.Death
 		ChatFrame:AddMessage("Me loaded " .. self.ImageDeathCt .. " piccus", 0.5, 0.5, 0.5)
 
-		self.ImageOverkillCt = table_len(self.Images.Overkill)
+		self.ImageOverkillCt = self.ImageOverkillCt or #self.Images.Overkill
 		ChatFrame:AddMessage("Me loaded " .. self.ImageOverkillCt .. " piccus", 0.5, 0.5, 0.5)
 
-		self.ImageSpecialCt = table_len(self.Images.Special)
+		self.ImageSpecialCt = self.ImageSpecialCt or #self.Images.Special
 		ChatFrame:AddMessage("Me loaded " .. self.ImageSpecialCt .. " piccus", 0.5, 0.5, 0.5)
 
-		self.ImageMortalCombatCt = table_len(self.Images.MortalCombat)
+		self.ImageMortalCombatCt = self.ImageMortalCombatCt or #self.Images.MortalCombat
 		ChatFrame:AddMessage("Me loaded " .. self.ImageMortalCombatCt .. " piccus", 0.5, 0.5, 0.5)
 
 		-- Counting Normal Sounds --
-		self.SoundCritCt = table_len(self.Sounds.Crit)
+		self.SoundCritCt = self.SoundCritCt or #self.Sounds.Crit
 		ChatFrame:AddMessage("Me loaded " .. self.SoundCritCt .. " sounds", 1, 0.3, 1)
 
 		-- Counting Zone Sounds --
-		self.SoundZoneCt = table_len(self.Sounds.Zone)
+		self.SoundZoneCt = self.SoundZoneCt or #self.Sounds.Zone
 		ChatFrame:AddMessage("Me loaded " .. self.SoundZoneCt .. " sounds", 1, 1, 1)
 
 		-- Counting One hit Sounds --
-		self.SoundOneHitCt = table_len(self.Sounds.OneHit)
+		self.SoundOneHitCt = self.SoundOneHitCt or #self.Sounds.OneHit
 		ChatFrame:AddMessage("Me loaded " .. self.SoundOneHitCt .. " sounds", 1, 1, 1)
 
 		-- Counting Healing Sounds --
-		self.SoundHealingCt = table_len(self.Sounds.Healing)
+		self.SoundHealingCt = self.SoundHealingCt or #self.Sounds.Healing
 		ChatFrame:AddMessage("Me loaded " .. self.SoundHealingCt .. " sounds", 1, 1, 1)
 
 		-- Counting Special Sounds --
-		self.SoundSpecialCt = table_len(self.Sounds.Special)
+		self.SoundSpecialCt = self.SoundSpecialCt or #self.Sounds.Special
 		ChatFrame:AddMessage("Me loaded " .. self.SoundSpecialCt .. " specials", 1, 0.3, 0.3)
 
 		-- Counting Ability Sounds --
-		self.SoundAbilityCt = table_len(self.Sounds.Ability)
+		self.SoundAbilityCt = self.SoundAbilityCt or #self.Sounds.Ability
 		ChatFrame:AddMessage("Me loaded " .. self.SoundAbilityCt .. " sounds", 1, 1, 1)
 
 		-- Counting Death Sounds --
-		self.SoundDeathCt = table_len(self.Sounds.Death)
+		self.SoundDeathCt = self.SoundDeathCt or #self.Sounds.Death
 		ChatFrame:AddMessage("Me loaded " .. self.SoundDeathCt .. " sounds", 1, 1, 1)
 
 		-- Counting Ready check Sounds --
-		self.SoundReadyCheckCt = table_len(self.Sounds.ReadyCheck)
+		self.SoundReadyCheckCt = self.SoundReadyCheckCt or #self.Sounds.ReadyCheck
 		ChatFrame:AddMessage("Me loaded " .. self.SoundReadyCheckCt .. " sounds", 1, 1, 1)
 
 		-- Counting Res Sounds --
-		self.SoundResCt = table_len(self.Sounds.Res)
+		self.SoundResCt = self.SoundResCt or #self.Sounds.Res
 		ChatFrame:AddMessage("Me loaded " .. self.SoundResCt .. " sounds", 1, 1, 1)
 
 		-- Counting Objection Sounds --
-		self.SoundObjectionCt = table_len(self.Sounds.Objection)
+		self.SoundObjectionCt = self.SoundObjectionCt or #self.Sounds.Objection
 		ChatFrame:AddMessage("Me loaded " .. self.SoundObjectionCt .. " sounds", 1, 1, 1)
 
 		-- Counting KillCount Sounds --
-		self.SoundKillCountCt = table_len(self.Sounds.KillCount)
+		self.SoundKillCountCt = self.SoundKillCountCt or #self.Sounds.KillCount
 		ChatFrame:AddMessage("Me loaded " .. self.SoundKillCountCt .. " sounds", 1, 1, 1)
 
 		ChatFrame:AddMessage("Open options GUI with /comix or get Slashcommands with /comix help", 0.7, 0.7, 1)
@@ -390,8 +392,8 @@ do
 		self:ToggleEvent("READY_CHECK", "readySound")
 		self:ToggleEvent("ZONE_CHANGED_NEW_AREA", "zoneSound")
 
-		self:ToggleEvent("PLAYER_TARGET_CHANGED", "finishSound")
-		self:ToggleEvent("UNIT_HEALTH", "finishSound")
+		self:ToggleEvent("PLAYER_TARGET_CHANGED", "finish")
+		self:ToggleEvent("UNIT_HEALTH", "finish")
 
 		self:ToggleEvent("PLAYER_DEAD", "deathSound")
 		self:ToggleEvent("RESURRECT_REQUEST", "resSound")
@@ -407,12 +409,12 @@ end
 
 function Comix:ToggleEvent(event, ...)
 	for i = 1, select("#", ...) do
-		if self.db.profile[select(i, ...)] ~= nil then
+		if self.db.profile[select(i, ...)] == true then
 			self:RegisterEvent(event)
-			return
+		else
+			self:UnregisterEvent(event)
 		end
 	end
-	self:UnregisterEvent(event)
 end
 
 -------------------------------------------------------------------------------
@@ -429,24 +431,6 @@ function Comix:Update(elapsed)
 	elapsed = elapsed or 0
 	lastUpdate = lastUpdate + elapsed
 	while lastUpdate > updateInterval do
-
-		if type(Comix.isShaking) == "number" then
-			Comix.isShaking = Comix.isShaking - elapsed
-			if Comix.isShaking <= 0 then
-				WorldFrame:ClearAllPoints()
-				for _, v in pairs(Comix.oldWorldFramePoints) do
-					WorldFrame:SetPoint(v.point, v.xOffset, v.yOffset)
-				end
-				Comix.isShaking = false
-			else
-				WorldFrame:ClearAllPoints()
-				local rand = random(-100, 100) / (101 - Comix.db.profile.shakeIntensity - (Comix.db.profile.shakeOffset - 1))
-				for _, v in pairs(Comix.oldWorldFramePoints) do
-					WorldFrame:SetPoint(v.point, v.xOffset + rand, v.yOffset + rand)
-				end
-			end
-		end
-
 		for i = 1, 5 do
 			local frame = Comix.frames[i]
 			if frame and frame:IsVisible() then
@@ -486,26 +470,43 @@ end
 
 -------------------------------------------------------------------------------
 
-function Comix:Shake()
-	if not (self.db.profile.enabled and self.db.profile.shake) then return end
-	if not self.isShaking then
-		self.oldWorldFramePoints = {}
-		for i = 1, WorldFrame:GetNumPoints() do
-			local point, frame, relPoint, xOffset, yOffset = WorldFrame:GetPoint(i)
+function Comix:Shake(force)
+	if not (self.db.profile.enabled and (self.db.profile.shake or force)) then return end
+	local shaker = self.ShakeFrame
+	if not shaker then
+		shaker = CreateFrame("Frame", "ComixShakeFrame", UIParent)
+		shaker:Hide()
+		shaker:SetScript("OnShow", function(self)
+			self.elapsed = 0
+			if not self.originalPoints then
+				self.originalPoints = {}
+				for i = 1, WorldFrame:GetNumPoints() do
+					self.originalPoints[#self.originalPoints + 1] = {WorldFrame:GetPoint(i)}
+				end
+			end
+		end)
+		shaker:SetScript("OnUpdate", function(self, elapsed)
+			elapsed = self.elapsed + elapsed
 
-			if xOffset ~= self.worldFramePoints[i]["xOffset"] then
-				xOffset = self.worldFramePoints[i]["xOffset"]
+			if elapsed >= Comix.db.profile.shakeDuration or (WorldFrame:IsProtected() and InCombatLockdown()) then
+				self:Hide()
+			else
+				local rand =
+					random(-100, 100) / (101 - Comix.db.profile.shakeIntensity - (Comix.db.profile.shakeOffset - 1))
+				WorldFrame:ClearAllPoints()
+				for i = 1, #self.originalPoints do
+					local v = self.originalPoints[i]
+					WorldFrame:SetPoint(v[1], v[2], v[3], v[4] + rand, v[5] + rand)
+				end
 			end
 
-			if yOffset ~= self.worldFramePoints[i]["yOffset"] then
-				yOffset = self.worldFramePoints[i]["yOffset"]
-			end
+			self.elapsed = elapsed
+		end)
 
-			self.oldWorldFramePoints[i] = {point = point, frame = frame, relPoint = relPoint, xOffset = xOffset, yOffset = yOffset}
-		end
-
-		self.isShaking = self.db.profile.shakeDuration or 1
+		self.ShakeFrame = shaker
 	end
+
+	shaker:Show()
 end
 
 function Comix:Flash(r, g, b, size)
@@ -625,11 +626,11 @@ do
 	function Comix:CHAT_MSG_TEXT_EMOTE(event, msg, name)
 		if msg and (strfind(msg:lower(), L["object"]) or strfind(msg:lower(), L["objects"])) then
 			if UnitInParty(name) or UnitInRaid(name) then
-				if self.db.profile.objectionImage then
+				if self.db.profile.objection and self.db.profile.objectionImage then
 					self:CallPic("portrait", name)
 					self:CallPic(self.Images.Special[5])
 				end
-				if self.db.profile.objectionSound then
+				if self.db.profile.objection and self.db.profile.objectionSound then
 					self:DongSound(self.Sounds.Objection, UnitSex(name) == 3 and random(3, 4) or random(1, 2))
 				end
 			else
@@ -664,8 +665,8 @@ do
 		end
 	end
 
-	local COMBATLOG_OBJECT_AFFILIATION_MINE = COMBATLOG_OBJECT_AFFILIATION_MINE
-	local COMBATLOG_OBJECT_REACTION_FRIENDLY = COMBATLOG_OBJECT_REACTION_FRIENDLY
+	local COMBATLOG_OBJECT_AFFILIATION_MINE = COMBATLOG_OBJECT_AFFILIATION_MINE or 0x00000001
+	local COMBATLOG_OBJECT_REACTION_FRIENDLY = COMBATLOG_OBJECT_REACTION_FRIENDLY or 0x00000010
 
 	function Comix:COMBAT_LOG_EVENT_UNFILTERED(_, _, event, srcGUID, srcName, srcFlags, dstGUID, dstName, dstFlags, ...)
 		if event == "SPELL_AURA_APPLIED" and select(2, ...) == L["Battle Shout"] then
