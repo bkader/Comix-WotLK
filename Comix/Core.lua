@@ -4,15 +4,12 @@ Comix.callbacks = Comix.callbacks or LibStub("CallbackHandler-1.0"):New(Comix)
 
 local L = LibStub("AceLocale-3.0"):GetLocale("Comix")
 local ACD = LibStub("AceConfigDialog-3.0")
-local LSM = LibStub("LibSharedMedia-3.0")
 local random = math.random
 local format = string.format
 local ChatFrame = DEFAULT_CHAT_FRAME
 local _
 
 function Comix:OnInitialize()
-	LSM:Register("font", "Comix", [=[Interface\AddOns\Comix\Media\Fonts\Comix.ttf]=])
-
 	self.db = LibStub("AceDB-3.0"):New("ComixDB", self.defaults, "Default")
 
 	LibStub("AceConfig-3.0"):RegisterOptionsTable("Comix", self.options)
