@@ -10,7 +10,6 @@
 ## X-Email: bkader@mail.com
 ## X-Website: https://github.com/bkader/Comix-WotLK
 ## X-Localizations: Abel (ES), Kader (FR)
-## X-Donate: PayPal or Paysera at |cff20ff20bkader@mail.com|r
 
 Embeds.xml
 Locales.xml
