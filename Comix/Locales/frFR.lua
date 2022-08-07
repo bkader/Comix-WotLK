@@ -1,4 +1,4 @@
--- [[ translator: bkader#6361 ]] --
+-- [[ translator: bkader#5341 ]] --
 local L = LibStub("AceLocale-3.0"):NewLocale("Comix", "frFR")
 if not L then return end
 

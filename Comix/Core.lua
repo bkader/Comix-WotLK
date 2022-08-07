@@ -62,7 +62,7 @@ do
 		elseif cmd == "shake" then
 			Comix:Shake(true)
 		elseif cmd == "about" then
-			Comix:Print("Author: \124cfff58cbaKader\124r (\124cff808080bkader#6361\124r)\nEmail: \124cff20ff20bkader@mail.com\124r\nWebsite: \124cff20ff20https://github.com/waddons/Comix-WotLK\124r")
+			Comix:Print("Author: \124cfff58cbaKader\124r (\124cff808080bkader#5341\124r)\nEmail: \124cff20ff20bkader@mail.com\124r\nWebsite: \124cff20ff20https://github.com/waddons/Comix-WotLK\124r")
 		elseif cmd == "debug" then
 			Comix.db.profile.debug = not Comix.db.profile.debug
 		elseif cmd == "help" then

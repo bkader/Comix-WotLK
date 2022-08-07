@@ -4,7 +4,7 @@
 ## DefaultState: Enabled
 ## LoadOnDemand: 0
 ## SavedVariablesPerCharacter: ComixDB
-## Author: Kader (|cff808080bkader#6361|r)
+## Author: Kader (|cff808080bkader#5341|r)
 ## Version: 1.0.0
 ## X-License: MIT/X
 ## X-Email: bkader@mail.com
